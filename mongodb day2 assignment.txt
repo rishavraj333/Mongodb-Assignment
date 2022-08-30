@@ -145,4 +145,20 @@ Q27.Write a MongoDB query to arranged the name of the cuisine in ascending order
 Ans-db.hotel.find().sort({"cuisine":1,"borough" : -1,}).pretty()
 
 Q28.Write a MongoDB query to know whether all the addresses contains the street or not.
-Ans- db.hotel.find({"address.street" :{ $exists : true } }).pretty()      
+Ans- db.hotel.find({"address.street" :{ $exists : true } }).pretty() 
+
+Q29.Write a MongoDB query which will select all documents in the restaurants collection where the
+    coord field value is Double.
+Ans-db.hotel.find({"address.coord" :{$type : 1}}).pretty()
+
+Q30.Write a MongoDB query which will select the restaurant Id, name and grades for those
+    restaurants which returns 0 as a remainder after dividing the score by 7.
+Ans-db.hotel.find({"grades.score" :{$mod : [7,0]}},{"restaurant_id" : 1,"name":1,"grades":1}).pretty()
+
+Q31. Write a MongoDB query to find the restaurant name, borough, longitude and attitude and
+   cuisine for those restaurants which contains 'mon' as three letters somewhere in its name.
+Ans-db.hotel.find({ name :{ $regex : "mon.*", $options: "i" }},{"name":1,"borough":1,"address.coord":1,"cuisine" :1}).pretty()
+
+Q32.Write a MongoDB query to find the restaurant name, borough, longitude and latitude and
+    cuisine for those restaurants which contain 'Mad' as first three letters of its name.
+Ans-db.hotel.find({ name :{ $regex : "Mad.*", $options: "i" }},{"name":1,"borough":1,"address.coord":1,"cuisine" :1}).pretty()
